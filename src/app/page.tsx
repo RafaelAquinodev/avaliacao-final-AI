@@ -9,18 +9,17 @@ const Home = () => {
       <div className="flex flex-col items-center justify-center max-w-4xl mx-auto text-center gap-8">
         <div className="space-y-8">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-            Radar de Competências em Inteligência Artificial
+            Quiz de Background Profissional
           </h1>
           <div className="space-y-4">
             <p className="md:text-xl text-pretty text-muted-foreground max-w-[40ch] md:max-w-[65ch] mx-auto">
-              Responda 8 perguntas rápidas para mapear seu nível de conhecimento
-              em ferramentas de IA e identificar oportunidades de crescimento e
-              automação.
+              Avalie seu perfil de transformação digital e descubra em qual
+              estágio você se encontra na jornada de inovação tecnológica.
             </p>
             <p className="md:text-xl text-muted-foreground text-pretty max-w-[39ch] md:max-w-[64ch] mx-auto">
-              Descubra em menos de 2 minutos como está sua preparação para
-              acompanhar a evolução desse campo dinâmico e receba um diagnóstico
-              gratuito e instantâneo.
+              Responda perguntas sobre formação, experiência profissional,
+              competências digitais e visão estratégica para receber um
+              diagnóstico personalizado.
             </p>
           </div>
         </div>
@@ -30,23 +29,23 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="flex flex-col items-center">
                 <CheckCircle className="h-12 w-12 text-primary mb-3" />
-                <h3 className="font-semibold mb-2">Avaliação Rápida</h3>
+                <h3 className="font-semibold mb-2">Avaliação Completa</h3>
                 <p className="text-sm text-muted-foreground">
-                  8 perguntas, 2 minutos
+                  Perguntas sobre seu perfil digital
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <BarChart3 className="h-12 w-12 text-accent mb-3" />
-                <h3 className="font-semibold mb-2">Resultados Instantâneos</h3>
+                <h3 className="font-semibold mb-2">Diagnóstico Detalhado</h3>
                 <p className="text-sm text-muted-foreground">
-                  Diagnóstico personalizado
+                  Identifique seu nível de maturidade
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <Target className="h-12 w-12 text-primary mb-3" />
-                <h3 className="font-semibold mb-2">Insights Acionáveis</h3>
+                <h3 className="font-semibold mb-2">Plano de Ação</h3>
                 <p className="text-sm text-muted-foreground">
-                  Próximos passos claros
+                  Recomendações personalizadas
                 </p>
               </div>
             </div>
