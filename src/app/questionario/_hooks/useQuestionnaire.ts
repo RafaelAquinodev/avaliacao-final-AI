@@ -1,43 +1,67 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { Question } from "../questionType";
 
-export interface Question {
-  id: number;
-  title: string;
-  question: string;
-}
 export interface FormData {
   company: string;
 }
+
 export function useQuestionnaire(questions: Question[]) {
   const [formData, setFormData] = useState<FormData>({ company: "" });
-  const [answers, setAnswers] = useState<number[]>(
-    new Array(questions.length).fill(0)
+  const [answers, setAnswers] = useState<(string | string[])[]>(
+    new Array(questions.length).fill("")
   );
   const [isSending, setIsSending] = useState(false);
   const router = useRouter();
 
-  const min = 0,
-    max = 10,
-    step = 1;
-  const marks = Array.from({ length: max - min + 1 }, (_, i) => i + min);
+  const calculateAnsweredCount = () => {
+    return answers.filter((answer) => {
+      if (Array.isArray(answer)) {
+        return answer.length > 0;
+      }
+      return answer !== "";
+    }).length;
+  };
 
-  const progress =
-    (answers.filter((answer) => answer !== 0).length / questions.length) * 100;
+  const progress = (calculateAnsweredCount() / questions.length) * 100;
 
-  const handleAnswerChange = (index: number, value: number[]) => {
+  const handleAnswerChange = (index: number, value: string | string[]) => {
     const newAnswers = [...answers];
-    newAnswers[index] = value[0];
+    newAnswers[index] = value;
     setAnswers(newAnswers);
   };
 
-  const resposta = questions.map((q) => ({
+  const calculateTotalScore = () => {
+    return answers.reduce((total, answer, index) => {
+      const question = questions[index];
+      if (Array.isArray(answer)) {
+        // Se tiver várias respostas, soma
+        const points = answer.reduce((sum, val) => {
+          const selectedAnswer = question.answers.find((a) => a.value === val);
+          return sum + (selectedAnswer?.points || 0);
+        }, 0);
+        return total + points;
+      } else {
+        const selectedAnswer = question.answers.find((a) => a.value === answer);
+        return total + (selectedAnswer?.points || 0);
+      }
+    }, 0);
+  };
+
+  const totalScore = calculateTotalScore();
+
+  const resposta = questions.map((q, index) => ({
     pergunta: q.id,
-    resposta: answers[q.id - 1],
+    resposta: answers[index],
   }));
 
-  const totalScore = answers.reduce((acc, curr) => acc + curr, 0);
+  const isAnswerEmpty = (answer: string | string[]) => {
+    if (Array.isArray(answer)) {
+      return answer.length === 0;
+    }
+    return answer === "";
+  };
 
   const handleSubmit = async () => {
     if (isSending) return;
@@ -46,11 +70,14 @@ export function useQuestionnaire(questions: Question[]) {
       toast.error("Por favor, insira o nome da empresa.");
       return;
     }
-    if (answers.some((ans) => ans === 0)) {
-      router.push(`/questionario/#${answers.findIndex((ans) => ans === 0)}`);
+
+    const unansweredIndex = answers.findIndex(isAnswerEmpty);
+    if (unansweredIndex !== -1) {
+      router.push(`/questionario/#${unansweredIndex + 1}`);
       toast.error("Por favor, responda todas as perguntas.");
       return;
     }
+
     setIsSending(true);
     try {
       const response = await fetch("/api", {
@@ -64,7 +91,7 @@ export function useQuestionnaire(questions: Question[]) {
       if (response.ok) {
         toast.success("Respostas enviadas com sucesso!");
         router.push(`/feedback/${totalScore}`);
-        setAnswers(new Array(questions.length).fill(0));
+        setAnswers(new Array(questions.length).fill(""));
       } else {
         toast.error("Erro ao enviar as respostas. Tente novamente.");
       }
@@ -82,10 +109,6 @@ export function useQuestionnaire(questions: Question[]) {
     answers,
     setAnswers,
     isSending,
-    min,
-    max,
-    step,
-    marks,
     progress,
     handleAnswerChange,
     handleSubmit,

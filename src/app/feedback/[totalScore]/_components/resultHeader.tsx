@@ -9,7 +9,7 @@ export function ResultHeader({ icon, totalScore, level }: ResultHeaderProps) {
     <div className="mb-8">
       <div className="flex justify-center mb-6">{icon}</div>
       <h1 className="text-4xl font-bold text-foreground mb-4">
-        Sua Pontuação: {totalScore}/80
+        Sua Pontuação: {totalScore}/150
       </h1>
       <h2 className="text-2xl font-semibold text-accent mb-6">{level}</h2>
     </div>

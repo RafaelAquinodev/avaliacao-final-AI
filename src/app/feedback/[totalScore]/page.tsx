@@ -35,7 +35,11 @@ const FeedbackPage = () => {
           </CardContent>
         </Card>
         <div className="flex justify-center gap-4">
-          <Button variant="secondary" className="text-lg px-8 py-6" asChild>
+          <Button
+            variant="secondary"
+            className="text-lg border border-white px-8 py-6"
+            asChild
+          >
             <Link href="/">Voltar para o início</Link>
           </Button>
         </div>

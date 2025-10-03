@@ -1,21 +1,20 @@
+import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
 import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardTitle,
-  CardDescription,
-} from "@/components/ui/card";
-import { Slider } from "@/components/ui/slider";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Question } from "../questionType";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 interface QuestionCardProps {
   index: number;
-  question: { id: number; title: string; question: string };
-  value: number;
-  onChange: (index: number, value: number[]) => void;
-  marks: number[];
-  min: number;
-  max: number;
-  step: number;
+  question: Question;
+  value: string | string[];
+  onChange: (index: number, value: string | string[]) => void;
 }
 
 export function QuestionCard({
@@ -23,40 +22,67 @@ export function QuestionCard({
   question,
   value,
   onChange,
-  marks,
-  min,
-  max,
-  step,
 }: QuestionCardProps) {
+  const handleSelectChange = (selectedValue: string) => {
+    onChange(index, selectedValue);
+  };
+
+  const handleCheckboxChange = (answerValue: string, checked: boolean) => {
+    const currentValues = Array.isArray(value) ? value : [];
+    let newValues: string[];
+
+    if (checked) {
+      newValues = [...currentValues, answerValue];
+    } else {
+      newValues = currentValues.filter((value) => value !== answerValue);
+    }
+
+    onChange(index, newValues);
+  };
+
   return (
     <Card id={`${question.id}`} className="p-6">
       <CardHeader>
-        <CardTitle className="text-lg">{question.title}</CardTitle>
-        <CardDescription className="text-base">
-          {question.question}
-        </CardDescription>
+        <CardTitle className="text-lg">{question.question}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
-          <p className="text-sm text-right text-muted-foreground">
-            Sua resposta: {value === 0 ? "Nenhuma" : value}
-          </p>
-          <Slider
-            value={[value]}
-            onValueChange={(val) => onChange(index, val)}
-            max={max}
-            min={min}
-            step={step}
-            className="w-full"
-          />
-          <div className="relative flex justify-between text-xs text-muted-foreground px-1 mt-2">
-            {marks.map((mark) => (
-              <span key={mark} className="w-[1px] text-center">
-                {mark}
-              </span>
+        {question.allowMultiple ? (
+          <div className="space-y-3">
+            {question.answers.map((answer) => (
+              <div key={answer.value} className="flex items-center space-x-2">
+                <Checkbox
+                  id={`${question.id}-${answer.value}`}
+                  checked={Array.isArray(value) && value.includes(answer.value)}
+                  onCheckedChange={(checked) =>
+                    handleCheckboxChange(answer.value, checked as boolean)
+                  }
+                />
+                <Label
+                  htmlFor={`${question.id}-${answer.value}`}
+                  className="text-sm font-normal cursor-pointer"
+                >
+                  {answer.label}
+                </Label>
+              </div>
             ))}
           </div>
-        </div>
+        ) : (
+          <Select
+            value={typeof value === "string" ? value : ""}
+            onValueChange={handleSelectChange}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Selecione uma opção" />
+            </SelectTrigger>
+            <SelectContent>
+              {question.answers.map((answer) => (
+                <SelectItem key={answer.value} value={answer.value}>
+                  {answer.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
       </CardContent>
     </Card>
   );

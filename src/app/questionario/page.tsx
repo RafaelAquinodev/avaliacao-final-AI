@@ -14,20 +14,25 @@ const QuestionarioPage = () => {
     setFormData,
     answers,
     isSending,
-    min,
-    max,
-    step,
-    marks,
     progress,
     handleAnswerChange,
     handleSubmit,
   } = useQuestionnaire(questions);
 
+  const calculateAnsweredCount = () => {
+    return answers.filter((answer) => {
+      if (Array.isArray(answer)) {
+        return answer.length > 0;
+      }
+      return answer !== "";
+    }).length;
+  };
+
   return (
     <PageContainer className="items-start">
       <div className="max-w-3xl mx-auto">
         <QuestionnaireHeader
-          completed={answers.filter((ans) => ans !== 0).length}
+          completed={calculateAnsweredCount()}
           total={questions.length}
           progress={progress}
         />
@@ -38,8 +43,8 @@ const QuestionarioPage = () => {
               setCompany={(name) => setFormData({ ...formData, company: name })}
             />
             <p className="mb-8">
-              Para cada pergunta, selecione um valor de 1 a 10 que melhor
-              representa o seu nível de domínio.
+              Para cada pergunta, selecione a opção que melhor representa sua
+              situação.
             </p>
             {questions.map((question, idx) => (
               <QuestionCard
@@ -48,10 +53,6 @@ const QuestionarioPage = () => {
                 question={question}
                 value={answers[idx]}
                 onChange={handleAnswerChange}
-                marks={marks}
-                min={min}
-                max={max}
-                step={step}
               />
             ))}
             <div className="text-center">

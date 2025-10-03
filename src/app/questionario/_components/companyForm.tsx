@@ -22,7 +22,7 @@ export function CompanyForm({ company, setCompany }: CompanyFormProps) {
           maxLength={30}
           autoComplete="off"
           onChange={(e) => setCompany(e.target.value)}
-          className="mt-2 border border-border"
+          className="mt-2 border border-input"
         />
       </CardContent>
     </Card>
