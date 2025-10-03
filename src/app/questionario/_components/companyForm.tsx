@@ -8,7 +8,7 @@ interface CompanyFormProps {
 }
 export function CompanyForm({ company, setCompany }: CompanyFormProps) {
   return (
-    <Card className="p-6">
+    <Card className="px-0">
       <CardContent>
         <Label htmlFor="assessmentCompany" className="text-base font-semibold">
           Empresa
