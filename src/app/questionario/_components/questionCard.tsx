@@ -41,7 +41,7 @@ export function QuestionCard({
   };
 
   return (
-    <Card id={`${question.id}`} className="p-6">
+    <Card id={`${question.id}`} className="px-0">
       <CardHeader>
         <CardTitle className="text-lg">{question.question}</CardTitle>
       </CardHeader>
@@ -71,12 +71,16 @@ export function QuestionCard({
             value={typeof value === "string" ? value : ""}
             onValueChange={handleSelectChange}
           >
-            <SelectTrigger className="w-full">
+            <SelectTrigger className="w-full max-w-[calc(100vw-5rem)] break-words text-sm leading-relaxed">
               <SelectValue placeholder="Selecione uma opção" />
             </SelectTrigger>
             <SelectContent>
               {question.answers.map((answer) => (
-                <SelectItem key={answer.value} value={answer.value}>
+                <SelectItem
+                  key={answer.value}
+                  value={answer.value}
+                  className="break-words text-sm leading-relaxed max-w-[calc(100vw-2rem)]"
+                >
                   {answer.label}
                 </SelectItem>
               ))}
