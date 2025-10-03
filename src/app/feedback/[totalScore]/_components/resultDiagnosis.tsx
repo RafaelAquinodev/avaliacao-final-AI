@@ -1,5 +1,6 @@
 interface ResultDiagnosisProps {
   diagnosis: string[];
+  recomendation?: string[];
 }
 
 export function ResultDiagnosis({ diagnosis }: ResultDiagnosisProps) {

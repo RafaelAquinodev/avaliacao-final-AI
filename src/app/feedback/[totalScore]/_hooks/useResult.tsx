@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 
 export type ResultData = {
+  recomendation?: string[];
   icon: React.ReactNode;
   level: string;
   diagnosis: string[];
