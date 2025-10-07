@@ -9,17 +9,22 @@ const Home = () => {
       <div className="flex flex-col items-center justify-center max-w-4xl mx-auto text-center gap-8">
         <div className="space-y-8">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-            Quiz de Background Profissional
+            Teste Final da Fase 1
           </h1>
           <div className="space-y-4">
             <p className="md:text-xl text-pretty text-muted-foreground max-w-[40ch] md:max-w-[65ch] mx-auto">
-              Avalie seu perfil de transformação digital e descubra em qual
-              estágio você se encontra na jornada de inovação tecnológica.
+              Bem-vindo ao teste final de transformação digital! Este é o
+              momento de avaliar seu nível de domínio sobre os conceitos
+              essenciais que guiam a inovação tecnológica em organizações e
+              carreiras.
             </p>
             <p className="md:text-xl text-muted-foreground text-pretty max-w-[39ch] md:max-w-[64ch] mx-auto">
-              Responda perguntas sobre formação, experiência profissional,
-              competências digitais e visão estratégica para receber um
-              diagnóstico personalizado.
+              Serão explorados temas como inteligência artificial preditiva e
+              generativa, modelos fundacionais, fundamentos matemáticos,
+              competências digitais, aprendizagem contínua e visão estratégica
+              para os novos desafios profissionais. Responda cada questão com
+              atenção e, ao final, receba um diagnóstico personalizado do seu
+              estágio na jornada digital.
             </p>
           </div>
         </div>

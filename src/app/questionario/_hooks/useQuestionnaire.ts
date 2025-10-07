@@ -8,44 +8,31 @@ export interface FormData {
 }
 
 export function useQuestionnaire(questions: Question[]) {
+  // Resposta única por questão (não múltipla escolha)
   const [formData, setFormData] = useState<FormData>({ company: "" });
-  const [answers, setAnswers] = useState<(string | string[])[]>(
+  const [answers, setAnswers] = useState<string[]>(
     new Array(questions.length).fill("")
   );
   const [isSending, setIsSending] = useState(false);
   const router = useRouter();
 
   const calculateAnsweredCount = () => {
-    return answers.filter((answer) => {
-      if (Array.isArray(answer)) {
-        return answer.length > 0;
-      }
-      return answer !== "";
-    }).length;
+    return answers.filter((answer) => answer !== "").length;
   };
 
   const progress = (calculateAnsweredCount() / questions.length) * 100;
 
-  const handleAnswerChange = (index: number, value: string | string[]) => {
+  const handleAnswerChange = (index: number, value: string) => {
     const newAnswers = [...answers];
     newAnswers[index] = value;
     setAnswers(newAnswers);
   };
 
   const calculateTotalScore = () => {
-    return answers.reduce((total, answer, index) => {
+    return answers.reduce((total, userAnswer, index) => {
       const question = questions[index];
-      if (Array.isArray(answer)) {
-        // Se tiver várias respostas, soma
-        const points = answer.reduce((sum, val) => {
-          const selectedAnswer = question.answers.find((a) => a.value === val);
-          return sum + (selectedAnswer?.points || 0);
-        }, 0);
-        return total + points;
-      } else {
-        const selectedAnswer = question.answers.find((a) => a.value === answer);
-        return total + (selectedAnswer?.points || 0);
-      }
+      const correctAnswer = question.answers.find((a) => a.correct)?.value;
+      return userAnswer === correctAnswer ? total + 1 : total;
     }, 0);
   };
 
@@ -56,15 +43,11 @@ export function useQuestionnaire(questions: Question[]) {
     resposta: answers[index],
   }));
 
-  const isAnswerEmpty = (answer: string | string[]) => {
-    if (Array.isArray(answer)) {
-      return answer.length === 0;
-    }
-    return answer === "";
-  };
+  const isAnswerEmpty = (answer: string) => answer === "";
 
   const handleSubmit = async () => {
     if (isSending) return;
+
     if (!formData.company) {
       router.push(`/questionario/#0`);
       toast.error("Por favor, insira o nome da empresa.");
@@ -79,28 +62,14 @@ export function useQuestionnaire(questions: Question[]) {
     }
 
     setIsSending(true);
-    try {
-      const response = await fetch("/api", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          answers: resposta,
-          company: formData.company,
-        }),
-      });
-      if (response.ok) {
-        toast.success("Respostas enviadas com sucesso!");
-        router.push(`/feedback/${totalScore}`);
-        setAnswers(new Array(questions.length).fill(""));
-      } else {
-        toast.error("Erro ao enviar as respostas. Tente novamente.");
-      }
-    } catch (error) {
-      console.error(error);
-      toast.error("Erro ao enviar as respostas.");
-    } finally {
-      setIsSending(false);
-    }
+    console.log("Respostas completas:", resposta);
+
+    // Pular o envio ao banco e ir direto para o feedback:
+    toast.success("Respostas simuladas com sucesso! (Banco desativado)");
+    router.push(`/feedback/${totalScore}`);
+
+    setAnswers(new Array(questions.length).fill(""));
+    setIsSending(false);
   };
 
   return {

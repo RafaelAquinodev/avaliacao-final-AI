@@ -1,526 +1,304 @@
 export interface Answer {
   label: string;
   value: string;
-  points: number;
+  correct: boolean; // Novo campo indicando se a resposta é a correta
 }
-
 export interface Question {
   id: number;
   number: number;
   question: string;
   answers: Answer[];
-  allowMultiple?: boolean;
 }
-
 export const baseQuestions: Omit<Question, "number">[] = [
   {
     id: 1,
-    question: "Qual é a sua formação acadêmica principal?",
+    question: "Qual é o principal objetivo da IA preditiva?",
     answers: [
-      { label: "A) Ensino médio incompleto", value: "A", points: 0 },
-      { label: "B) Ensino médio completo", value: "B", points: 1 },
-      { label: "C) Ensino técnico", value: "C", points: 2 },
-      { label: "D) Graduação completa", value: "D", points: 6 },
-      { label: "E) Pós-graduação / MBA", value: "E", points: 8 },
-      { label: "F) Mestrado ou Doutorado", value: "F", points: 12 },
+      {
+        label: "A) Criar novos conteúdosem diferentes formatos",
+        value: "A",
+        correct: false,
+      },
+      {
+        label: "B) Prever resultados futuros a partir de dados históricos",
+        value: "B",
+        correct: true,
+      },
+      {
+        label: "C) Gerar música e imagens originais",
+        value: "C",
+        correct: false,
+      },
+      {
+        label: "D) Executar tarefas administrativas",
+        value: "D",
+        correct: false,
+      },
     ],
   },
   {
     id: 2,
-    question:
-      "Você possui algumas Especializações/certificações em tecnologia, inovação ou transformação digital?",
+    question: "A IA generativa foca em:",
     answers: [
-      { label: "A) Não", value: "A", points: 0 },
       {
-        label: "B) Sim, áreas não diretamente ligadas à tecnologia",
+        label: "A) Prever vendas com base em dados passados",
+        value: "A",
+        correct: false,
+      },
+      {
+        label: "B) Classificar dados estruturados",
         value: "B",
-        points: 1,
+        correct: false,
       },
       {
-        label: "C) Sim, certificações básicas e cursos livres",
+        label: "C) Criar novos dados similares aos de treinamento",
         value: "C",
-        points: 3,
+        correct: true,
       },
       {
-        label:
-          "D) Sim, especializações acadêmicas ou MBAs em inovação e tecnologia (lato sensu)",
+        label: "D) Extrair estatísticas de grandes bases",
         value: "D",
-        points: 4,
-      },
-      {
-        label:
-          "E) Sim, certificações intermediárias corporativas/setoriais (Scrum, ITIL, Agile, LGPD, ESG tech)",
-        value: "E",
-        points: 5,
-      },
-      {
-        label:
-          "F) Sim, certificações avançadas/reconhecidas (IA, Cloud, Ciência de Dados etc.)",
-        value: "F",
-        points: 10,
+        correct: false,
       },
     ],
   },
   {
     id: 3,
-    question:
-      "Você fez ou participou de cursos curtos ou workshops em áreas digitais (últimos 3 anos)?",
+    question: "Quais tipos de dados a IA preditiva utiliza principalmente?",
     answers: [
-      { label: "A) Não", value: "A", points: 0 },
       {
-        label: "B) Sim, apenas palestras ou eventos introdutórios",
+        label: "A) Não estruturados, como imagens e textos",
+        value: "A",
+        correct: false,
+      },
+      {
+        label: "B) Estruturados, como tabelas e registros numéricos",
         value: "B",
-        points: 1,
-      },
-      { label: "C) Sim, 1 curso ou workshop", value: "C", points: 2 },
-      { label: "D) Sim, 2 a 3 cursos ou workshops", value: "D", points: 5 },
-      {
-        label: "E) Sim, 4 a 5 cursos ou imersões de curta duração",
-        value: "E",
-        points: 6,
+        correct: true,
       },
       {
-        label: "F) Sim, mais de 3 cursos ou participação contínua",
-        value: "F",
-        points: 8,
+        label: "C) Dados de redes neurais convolucionais",
+        value: "C",
+        correct: false,
       },
-      {
-        label:
-          "G) Sim, participação em programas estruturados de capacitação corporativa (academias digitais, hubs de inovação)",
-        value: "G",
-        points: 9,
-      },
+      { label: "D) Dados gerados por GANs", value: "D", correct: false },
     ],
   },
   {
     id: 4,
     question:
-      "Você teve participação em projetos de transformação digital/inovação (últimos 5 anos)?",
+      "O atual “hype” da Inteligência Artificial é resultado de uma “tempestade perfeita” formada por:",
     answers: [
-      { label: "A) Não, e não tenho interesse", value: "A", points: 0 },
-      { label: "B) Não, mas tenho interesse", value: "B", points: 2 },
-      { label: "C) Sim, como colaborador indireto", value: "C", points: 4 },
       {
-        label: "D) Sim, participação direta na execução",
+        label:
+          "A) Popularização de dispositivos móveis,\n marketing digital e redes sociais",
+        value: "A",
+        correct: false,
+      },
+      {
+        label: "B) Crescimento do e-commerce, blockchain e internet das coisas",
+        value: "B",
+        correct: false,
+      },
+      {
+        label:
+          "C) Modelos de IA cada vez mais sofisticados,\ninfraestrutura de processamento e nuvem de grande capacidade,\ne riqueza e diversidade de dados acessíveis",
+        value: "C",
+        correct: true,
+      },
+      {
+        label:
+          "D) Avanços em hardware quântico, biotecnologia e realidade aumentada",
         value: "D",
-        points: 8,
+        correct: false,
       },
     ],
   },
   {
     id: 5,
     question:
-      "Marque as ferramentas ou plataformas digitais que você utiliza (pode marcar mais de uma opção)",
-    allowMultiple: true,
+      "Os modelos fundacionais são grandes modelos de IA treinados em enormes volumes de dados.\nPor que eles representam um marco importante para a evolução da IA?",
     answers: [
       {
         label:
-          "A) Plataformas internas corporativas (cadastro, intranet, portais internos de serviços)",
+          "A) Porque são algoritmos simples usados apenas para tarefas\n específicas e estáticas",
         value: "A",
-        points: 2,
+        correct: false,
       },
       {
         label:
-          "B) ERP (Enterprise Resource Planning) (SAP, TOTVS, Oracle, sistemas de gestão integrados)",
+          "B) Porque dispensam qualquer tipo de treinamento prévio\ne funcionam apenas com regras fixas",
         value: "B",
-        points: 2,
+        correct: false,
       },
       {
         label:
-          "C) CRM (Customer Relationship Management) (Salesforce, Dynamics, HubSpot)",
+          "C) Porque são limitados a processamento de imagens\n e não se aplicam a texto ou áudio",
         value: "C",
-        points: 2,
+        correct: false,
       },
       {
         label:
-          "D) Plataformas de colaboração (Microsoft Teams, Slack, Google Workspace)",
+          "D) Porque servem como base treinada\nem grandes volumes de dados, permitindo adaptar\n e reutilizar o mesmo modelo\nem diversas aplicações e contextos de negócio",
         value: "D",
-        points: 2,
+        correct: true,
       },
-      {
-        label:
-          "E) Ferramentas de IA generativa (ChatGPT, Copilot, Gemini, Claude)",
-        value: "E",
-        points: 5,
-      },
-      {
-        label:
-          "F) Ferramentas de análise de dados e BI (Power BI, Tableau, Qlik, Looker)",
-        value: "F",
-        points: 3,
-      },
-      {
-        label: "G) Plataformas de RH (ADP, Sólides, Gupy, Workday)",
-        value: "G",
-        points: 2,
-      },
-      {
-        label:
-          "H) Plataformas financeiras e de compliance (SAP FI/CO, Sênior, Protheus, Thomson Reuters)",
-        value: "H",
-        points: 2,
-      },
-      {
-        label:
-          "I) Plataformas de supply chain / logística (Infor, Manhattan, SAP SCM)",
-        value: "I",
-        points: 2,
-      },
-      {
-        label:
-          "J) Plataformas de atendimento e suporte (Zendesk, Freshdesk, ServiceNow, Chatbot)",
-        value: "J",
-        points: 2,
-      },
-      {
-        label:
-          "K) Ferramentas de gestão de projetos e produtividade (Jira, Trello, Asana, Monday)",
-        value: "K",
-        points: 2,
-      },
-      {
-        label:
-          "L) Plataformas jurídicas e de contratos (Legal One, Linte, Kurier)",
-        value: "L",
-        points: 2,
-      },
-      { label: "M) Outras relevantes", value: "M", points: 2 },
     ],
   },
   {
     id: 6,
-    question: "Qual a sua familiaridade com a cultura de dados e analytics?",
+    question:
+      "Estatística, probabilidade e cálculo formam o alicerce teórico da IA.\nComo esses conhecimentos influenciam a forma como a IA “compreende” e representa o mundo real?",
     answers: [
-      { label: "A) Nenhum conhecimento", value: "A", points: 0 },
       {
-        label: "B) Básico: interpreta relatórios prontos",
+        label:
+          "A) Tornam possível traduzir fenômenos complexos\nem representações numéricas, permitindo que a IA reconheça padrões\ne tome decisões com base em dados",
+        value: "A",
+        correct: true,
+      },
+      {
+        label:
+          "B) Garantem que todos os modelos de IA sejam sempre imparciais\n e sem vieses",
         value: "B",
-        points: 2,
+        correct: false,
       },
       {
-        label:
-          "C) Inicial: consegue extrair dados de planilhas ou sistemas e gerar análises simples",
+        label: "C) Eliminam a necessidade de criar algoritmos de aprendizado",
         value: "C",
-        points: 3,
+        correct: false,
       },
-      { label: "D) Intermediário: cria relatórios", value: "D", points: 4 },
       {
         label:
-          "E) Pré-avançado: combina múltiplas fontes, utiliza fórmulas, filtros e ferramentas de BI de forma recorrente",
-        value: "E",
-        points: 6,
-      },
-      {
-        label: "F) Avançado: desenvolve análises complexas/dashboards",
-        value: "F",
-        points: 8,
+          "D) Servem apenas para acelerar a criação de interfaces visuais atrativas",
+        value: "D",
+        correct: false,
       },
     ],
   },
   {
     id: 7,
     question:
-      "Você tem experiência com metodologias ágeis (Scrum, Kanban) ou gestão de produtos digitais?",
+      "Considerando que a IA depende de dados para aprender,\nqual é a maior implicação de nossa capacidade de medir fenômenos do mundo real?",
     answers: [
-      { label: "A) Não, e não tenho interesse", value: "A", points: 0 },
-      { label: "B) Não, mas tenho interesse", value: "B", points: 1 },
       {
-        label: "C) Sim, tenho algum conhecimento teórico",
+        label:
+          "A) Quanto mais conseguimos quantificar e estruturar dados\n do mundo real, maior é o potencial da IA para aprender\n padrões complexos,apoiar decisões e gerar soluções\n que impactam a sociedade",
+        value: "A",
+        correct: true,
+      },
+      {
+        label:
+          "B) A mensuração garante que todos os dados sejam\n sempre exatos e livres de vieses",
+        value: "B",
+        correct: false,
+      },
+      {
+        label:
+          "C) Medir fenômenos do mundo real elimina a necessidade\n de criar algoritmos complexos",
         value: "C",
-        points: 2,
+        correct: false,
       },
       {
         label:
-          "D) Sim, participação em times ágeis ou em rituais (daily, planning, review, retrospectiva)",
+          "D) A coleta de dados é um processo puramente técnico\n, sem qualquer influência ética ou social",
         value: "D",
-        points: 3,
-      },
-      {
-        label:
-          "E) Sim, atuação recorrente em projetos com papéis definidos (PO, PM, Scrum Master, Agile Coach)",
-        value: "E",
-        points: 4,
-      },
-      {
-        label: "F) Sim, experiência prática consolidada",
-        value: "F",
-        points: 5,
+        correct: false,
       },
     ],
   },
   {
     id: 8,
     question:
-      "Você tem alguma experiência com o uso de linguagens de programação?",
+      "A educação formal continua importante, mas vem perdendo espaço para cursos rápidos, tutoriais e hackathons.\nQual é o maior desafio que isso impõe a profissionais e organizações?",
     answers: [
-      { label: "A) Não", value: "A", points: 0 },
       {
         label:
-          "B) Contato inicial: já viu código ou acompanhou uso, mas nunca programou",
+          "A) Manter a educação formal como base,\nmas adotar estratégias de aprendizado contínuo e ágil —\ncom requalificação constante e microaprendizagens —\npara acompanhar a velocidade da transformação tecnológica",
+        value: "A",
+        correct: true,
+      },
+      {
+        label:
+          "B) Abandonar completamente a educação formal, pois cursos\n rápidos substituem qualquer formação tradicional",
         value: "B",
-        points: 1,
+        correct: false,
       },
       {
         label:
-          "C) Experimentação inicial: já copiou/rodou códigos prontos ou já fez exercícios simples",
+          "C) Manter o modelo educacional atual sem adaptações,\n já que garante profundidade suficiente",
         value: "C",
-        points: 2,
+        correct: false,
       },
-      { label: "D) Sim, nível básico", value: "D", points: 4 },
-      { label: "E) Sim, nível intermediário", value: "E", points: 6 },
-      { label: "F) Sim, nível avançado", value: "F", points: 10 },
+      {
+        label:
+          "D) Reconhecer que nenhum tipo de educação\n consegue acompanhar a tecnologia",
+        value: "D",
+        correct: false,
+      },
     ],
   },
   {
     id: 9,
     question:
-      "Se sim, marque as linguagens que você tem conhecimento (pode marcar mais de uma)",
-    allowMultiple: true,
+      "Com o aumento da expectativa de vida e o prolongamento da vida profissional,\no que se torna cada vez mais necessário nas carreiras?",
     answers: [
-      { label: "A) Nenhuma", value: "A", points: 0 },
-      { label: "B) Python", value: "B", points: 2 },
-      { label: "C) JavaScript", value: "C", points: 2 },
-      { label: "D) Java", value: "D", points: 2 },
-      { label: "E) C#", value: "E", points: 2 },
-      { label: "F) C/C++", value: "F", points: 2 },
-      { label: "G) Linguagem R", value: "G", points: 2 },
-      { label: "H) PHP", value: "H", points: 2 },
-      { label: "I) SQL", value: "I", points: 2 },
-      { label: "J) Go", value: "J", points: 2 },
-      { label: "K) TypeScript", value: "K", points: 2 },
-      { label: "L) HTML/CSS", value: "L", points: 2 },
-      { label: "M) Outra", value: "M", points: 2 },
+      {
+        label:
+          "A) Encará-las como um processo contínuo de reinvenção,\ninvestindo em requalificação, novas habilidades e flexibilidade\n para transitar entre áreas ao longo dos anos",
+        value: "A",
+        correct: true,
+      },
+      {
+        label:
+          "B) Permanecer em um único cargo por toda a vida,\n garantindo estabilidade sem novos aprendizados",
+        value: "B",
+        correct: false,
+      },
+      {
+        label:
+          "C) Reduzir a importância do aprendizado contínuo,\n já que carreiras longas exigem menos atualização",
+        value: "C",
+        correct: false,
+      },
+      {
+        label:
+          "D) Evitar mudanças de área, pois elas diminuem oportunidades de trabalho",
+        value: "D",
+        correct: false,
+      },
     ],
   },
   {
     id: 10,
-    question: "Qual a sua frequência de atualização sobre tendências digitais?",
-    answers: [
-      { label: "A) Nunca", value: "A", points: 0 },
-      {
-        label: "B) Apenas quando compartilhado por colegas ou empresa",
-        value: "B",
-        points: 1,
-      },
-      { label: "C) Raramente", value: "C", points: 2 },
-      { label: "D) Ocasionalmente (mensal)", value: "D", points: 3 },
-      { label: "E) Regularmente (semanal)", value: "E", points: 6 },
-      {
-        label: "F) Com frequência alta (várias vezes na semana)",
-        value: "F",
-        points: 8,
-      },
-      {
-        label: "G) De forma intensiva (diária ou parte da rotina profissional)",
-        value: "G",
-        points: 10,
-      },
-    ],
-  },
-  {
-    id: 11,
-    question:
-      "Qual a sua percepção sobre a sua abertura para mudanças de processo com novas tecnologias?",
+    question: "Por que a IA pode ser comparada a uma “inteligência sintética”?",
     answers: [
       {
-        label: "A) Resistente: evita ou se opõe a mudanças",
+        label:
+          "A) Porque executa apenas cálculos matemáticos complexos\nsem aprender com dados",
         value: "A",
-        points: 0,
+        correct: false,
       },
       {
-        label: "B) Prefiro manter processos existentes",
+        label: "B) Porque imita perfeitamente todas as capacidades humanas",
         value: "B",
-        points: 1,
+        correct: false,
       },
       {
         label:
-          "C) Neutro(a): aceita mudanças quando necessário, mas não busca nem incentiva ativamente",
+          "C) Porque busca reproduzir habilidades humanas\n — como aprender, raciocinar, interpretar dados\n e tomar decisões — auxiliando em diferentes áreas\n do cotidiano, dos negócios e de campos especializados",
         value: "C",
-        points: 2,
+        correct: true,
       },
       {
         label:
-          "D) Parcialmente flexível: demonstra interesse em testar, mas ainda com cautela",
+          "D) Porque é um conjunto de regras fixas que não exige treinamento",
         value: "D",
-        points: 3,
-      },
-      {
-        label:
-          "E) Totalmente flexível: receptivo(a) e engajado(a) em adotar novas tecnologias",
-        value: "E",
-        points: 6,
-      },
-      {
-        label:
-          "F) Proativo(a): sugere, apoia e promove mudanças de processos com tecnologia",
-        value: "F",
-        points: 8,
-      },
-    ],
-  },
-  {
-    id: 12,
-    question: "Qual a sua principal motivação para aprender novas ferramentas?",
-    answers: [
-      { label: "A) Exigência da empresa", value: "A", points: 1 },
-      {
-        label:
-          "B) Necessidade de negócio imediato (resolver problemas ou metas de curto prazo)",
-        value: "B",
-        points: 4,
-      },
-      { label: "C) Interesse pessoal e curiosidade", value: "C", points: 6 },
-      {
-        label: "D) Busca de crescimento de carreira e oportunidades futuras",
-        value: "D",
-        points: 8,
-      },
-      {
-        label: "E) Desejo de liderar iniciativas de inovação na organização",
-        value: "E",
-        points: 10,
-      },
-    ],
-  },
-  {
-    id: 13,
-    question:
-      "Quais as àreas de negócio que mais se beneficiariam da transformação digital (pode marcar mais de uma) na sua empresa?",
-    allowMultiple: true,
-    answers: [
-      { label: "A) Operações", value: "A", points: 3 },
-      { label: "B) Vendas e Marketing", value: "B", points: 3 },
-      { label: "C) Recursos Humanos", value: "C", points: 3 },
-      { label: "D) Finanças", value: "D", points: 3 },
-      { label: "E) Atendimento ao Cliente", value: "E", points: 3 },
-      { label: "F) P&D / Inovação", value: "F", points: 3 },
-      {
-        label: "G) Suprimentos / Cadeia de Suprimentos",
-        value: "G",
-        points: 3,
-      },
-      { label: "H) Jurídico & Compliance", value: "H", points: 3 },
-      { label: "I) TI & Infraestrutura", value: "I", points: 3 },
-      { label: "J) Serviços / Pós-venda", value: "J", points: 3 },
-      { label: "K) Projetos e dados", value: "K", points: 3 },
-      { label: "L) Consultoria", value: "L", points: 3 },
-      {
-        label:
-          "M) Comunicação Corporativa / Branding / Relações Institucionais",
-        value: "M",
-        points: 3,
-      },
-      { label: "N) Gestão de Produtos e Portfólio", value: "N", points: 3 },
-      {
-        label: "O) Auditoria, Controle e Gestão de Riscos",
-        value: "O",
-        points: 3,
-      },
-      { label: "P) Logística e Distribuição", value: "P", points: 3 },
-      { label: "Q) Outro", value: "Q", points: 3 },
-    ],
-  },
-  {
-    id: 14,
-    question:
-      "Na sua opinião quais as iniciativas de capacitação ou suporte que a empresa deveria priorizar?",
-    answers: [
-      { label: "A) Capacitação em IA e automação", value: "A", points: 5 },
-      {
-        label: "B) Treinamentos em ferramentas colaborativas e produtividade",
-        value: "B",
-        points: 3,
-      },
-      {
-        label: "C) Formação em análise de dados e visualização",
-        value: "C",
-        points: 5,
-      },
-      {
-        label: "D) Programas de mudança cultural e gestão de equipes digitais",
-        value: "D",
-        points: 4,
-      },
-      {
-        label: "E) Capacitação em cibersegurança e privacidade de dados",
-        value: "E",
-        points: 4,
-      },
-      {
-        label:
-          "F) Treinamento em metodologias ágeis e gestão de produtos digitais",
-        value: "F",
-        points: 4,
-      },
-    ],
-  },
-  {
-    id: 15,
-    question:
-      "Na sua opinião, qual deveria ser a principal prioridade estratégica da empresa nos próximos 2 anos?",
-    answers: [
-      {
-        label:
-          "A) Automatizar processos internos e reduzir custos operacionais",
-        value: "A",
-        points: 3,
-      },
-      {
-        label: "B) Melhorar a experiência do cliente em canais digitais",
-        value: "B",
-        points: 4,
-      },
-      {
-        label:
-          "C) Criar novos produtos/serviços baseados em tecnologias digitais",
-        value: "C",
-        points: 5,
-      },
-      {
-        label:
-          "D) Fortalecer a governança de dados, cibersegurança e conformidade regulatória",
-        value: "D",
-        points: 4,
-      },
-      {
-        label: "E) Desenvolver novas competências e requalificar equipes",
-        value: "E",
-        points: 5,
-      },
-    ],
-  },
-  {
-    id: 16,
-    question: "Qual o maior obstáculo para a transformação digital da empresa?",
-    answers: [
-      {
-        label: "A) Resistência cultural e medo da mudança",
-        value: "A",
-        points: 5,
-      },
-      {
-        label: "B) Falta de liderança com visão digital",
-        value: "B",
-        points: 5,
-      },
-      {
-        label: "C) Carência de profissionais capacitados em novas tecnologias",
-        value: "C",
-        points: 4,
-      },
-      {
-        label: "D) Limitações de infraestrutura tecnológica",
-        value: "D",
-        points: 3,
-      },
-      {
-        label: "E) Falta de investimento ou orçamento dedicado",
-        value: "E",
-        points: 3,
+        correct: false,
       },
     ],
   },
 ];
+
 export const questions: Question[] = baseQuestions.map((questionNumber) => ({
   ...questionNumber,
   number: questionNumber.id,

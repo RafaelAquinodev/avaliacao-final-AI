@@ -7,6 +7,7 @@ import { questions } from "./questionType";
 import { QuestionnaireHeader } from "./_components/questionnaireHeader";
 import { CompanyForm } from "./_components/companyForm";
 import { QuestionCard } from "./_components/questionCard";
+import { useEffect } from "react";
 
 const QuestionarioPage = () => {
   const {
@@ -18,6 +19,9 @@ const QuestionarioPage = () => {
     handleAnswerChange,
     handleSubmit,
   } = useQuestionnaire(questions);
+  useEffect(() => {
+    console.log("formData atualizado:", formData);
+  }, [formData]);
 
   const calculateAnsweredCount = () => {
     return answers.filter((answer) => {

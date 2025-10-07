@@ -129,3 +129,49 @@
     );
   }
 }
+[data-radix-select-trigger] span {
+  max-width: 100%;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+[data-slot="select-trigger"] {
+  /* Força altura em 40px, não deixa crescer, padding vertical controlado */
+  min-height: 40px !important;
+  max-height: 40px !important;
+  height: 40px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  /* Inverte ou reforça Tailwind/SHADCN py */
+}
+
+[data-slot="select-value"] {
+  display: block !important;
+  max-width: 100% !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  min-width: 0 !important;
+}
+/* Override para NÃO crescer verticalmente em nenhuma hipótese */
+button[role="combobox"][data-slot="select-trigger"] {
+  min-height: 40px !important;
+  max-height: 40px !important;
+  height: 40px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  line-height: 40px !important;
+  overflow: hidden !important;
+  align-items: center !important;
+  display: flex !important;
+}
+
+/* Força qualquer span dentro do botão a truncar e não quebrar linha */
+button[role="combobox"][data-slot="select-trigger"] * {
+  max-width: 100% !important;
+  display: block !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
