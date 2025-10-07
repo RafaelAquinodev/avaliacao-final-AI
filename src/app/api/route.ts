@@ -16,7 +16,6 @@ interface ErrorResponse {
 export async function POST(req: Request): Promise<NextResponse> {
   try {
     const data: RequestBody = await req.json();
-    console.log("Payload recebido na API:", JSON.stringify(data, null, 2));
 
     const questionAnswer = await prisma.question.create({
       data: {

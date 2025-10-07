@@ -37,22 +37,22 @@ const FeedbackPage = () => {
           </CardContent>
         </Card>
         {/* BOTÕES DE AÇÃO */}
-        <div className="flex flex-col md:flex-row justify-center md:justify-around gap-4 w-full max-w-3xl mx-auto mt-6">
+        <div className="flex flex-col md:flex-row justify-center gap-4 w-full max-w-3xl mx-auto mt-6">
           <Button
             variant="secondary"
             className="
-              text-lg
-              border border-white
-              px-8
-              py-6
-              w-full
-              md:w-auto
-              transition-all
-              duration-200
-              hover:bg-secondary/80
-              hover:scale-105
-              active:scale-95
-            "
+      text-lg
+      border border-white
+      px-8
+      py-6
+      flex-1
+      w-full
+      transition-all
+      duration-200
+      hover:bg-secondary/80
+      hover:scale-105
+      active:scale-95
+    "
             asChild
           >
             <Link href="/">Voltar para o início</Link>
@@ -60,18 +60,18 @@ const FeedbackPage = () => {
           <Button
             size="lg"
             className="
-              text-base
-              w-full
-              md:w-auto
-              px-8
-              py-6
-              transition-all
-              duration-200
-              hover:bg-primary-700
-              hover:scale-105
-              active:scale-95
-              flex items-center justify-center
-            "
+      text-base
+      flex-1
+      w-full
+      px-8
+      py-6
+      transition-all
+      duration-200
+      hover:bg-primary-700
+      hover:scale-105
+      active:scale-95
+      flex items-center justify-center
+    "
             onClick={() => router.push("/gabarito")}
           >
             <>
