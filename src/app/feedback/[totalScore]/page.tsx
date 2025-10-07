@@ -11,14 +11,11 @@ import { ArrowRight } from "lucide-react";
 
 const FeedbackPage = () => {
   const params = useParams<{ totalScore: string }>();
-
+  const router = useRouter();
   const result = useResult(params.totalScore);
   if (!result) {
     redirect("/");
-    return null;
   }
-  const router = useRouter();
-
   return (
     <PageContainer className="relative overflow-hidden md:justify-start">
       <div className="absolute inset-0 lg:bg-[url('/fundo1.svg')] bg-cover bg-center filter blur-md z-0" />
