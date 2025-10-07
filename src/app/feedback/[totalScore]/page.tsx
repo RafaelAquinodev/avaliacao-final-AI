@@ -11,11 +11,14 @@ import { ArrowRight } from "lucide-react";
 
 const FeedbackPage = () => {
   const params = useParams<{ totalScore: string }>();
-  const router = useRouter();
   const result = useResult(params.totalScore);
+  const router = useRouter(); // hook AQUI, no topo!
+
   if (!result) {
     redirect("/");
+    return null;
   }
+
   return (
     <PageContainer className="relative overflow-hidden md:justify-start">
       <div className="absolute inset-0 lg:bg-[url('/fundo1.svg')] bg-cover bg-center filter blur-md z-0" />
@@ -33,23 +36,23 @@ const FeedbackPage = () => {
             />
           </CardContent>
         </Card>
-        <div className="flex flex-col md:flex-row justify-center md:justify-around gap-4 w-full max-w-xl mx-auto mt-6">
+        {/* BOTÕES DE AÇÃO */}
+        <div className="flex flex-col md:flex-row justify-center md:justify-around gap-4 w-full max-w-3xl mx-auto mt-6">
           <Button
             variant="secondary"
             className="
-      text-lg
-      border border-white
-      px-8
-      py-6
-      flex-1
-      min-w-[180px]
-      max-w-[320px]
-      transition-all
-      duration-200
-      hover:bg-secondary/80
-      hover:scale-105
-      active:scale-95
-    "
+              text-lg
+              border border-white
+              px-8
+              py-6
+              w-full
+              md:w-auto
+              transition-all
+              duration-200
+              hover:bg-secondary/80
+              hover:scale-105
+              active:scale-95
+            "
             asChild
           >
             <Link href="/">Voltar para o início</Link>
@@ -58,9 +61,8 @@ const FeedbackPage = () => {
             size="lg"
             className="
               text-base
-              flex-1
-              min-w-[180px]
-              max-w-[320px]
+              w-full
+              md:w-auto
               px-8
               py-6
               transition-all
@@ -78,8 +80,10 @@ const FeedbackPage = () => {
             </>
           </Button>
         </div>
+        {/* FIM BOTÕES */}
       </div>
     </PageContainer>
   );
 };
+
 export default FeedbackPage;
