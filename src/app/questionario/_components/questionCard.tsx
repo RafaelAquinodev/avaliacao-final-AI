@@ -43,7 +43,10 @@ export function QuestionCard({
   return (
     <Card id={`${question.id}`} className="px-0">
       <CardHeader>
-        <CardTitle className="text-lg">{question.question}</CardTitle>
+        <CardTitle className="text-lg">
+          <span className="font-bold text-primary">{question.id}.</span>{" "}
+          {question.question}
+        </CardTitle>
       </CardHeader>
       <CardContent>
         {question.allowMultiple ? (

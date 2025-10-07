@@ -29,7 +29,7 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="flex flex-col items-center">
                 <CheckCircle className="h-12 w-12 text-primary mb-3" />
-                <h3 className="font-semibold mb-2">Avaliação Completa</h3>
+                <h3 className="font-semibold mb-2">Avaliação Profunda</h3>
                 <p className="text-sm text-muted-foreground">
                   Perguntas sobre seu perfil digital
                 </p>

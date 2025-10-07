@@ -6,12 +6,13 @@ export interface Answer {
 
 export interface Question {
   id: number;
+  number: number;
   question: string;
   answers: Answer[];
   allowMultiple?: boolean;
 }
 
-export const questions: Question[] = [
+export const baseQuestions: Omit<Question, "number">[] = [
   {
     id: 1,
     question: "Qual é a sua formação acadêmica principal?",
@@ -27,7 +28,7 @@ export const questions: Question[] = [
   {
     id: 2,
     question:
-      "Especializações/certificações em tecnologia, inovação ou transformação digital",
+      "Você possui algumas Especializações/certificações em tecnologia, inovação ou transformação digital?",
     answers: [
       { label: "A) Não", value: "A", points: 0 },
       {
@@ -62,7 +63,8 @@ export const questions: Question[] = [
   },
   {
     id: 3,
-    question: "Cursos curtos ou workshops em áreas digitais (últimos 3 anos)",
+    question:
+      "Você fez ou participou de cursos curtos ou workshops em áreas digitais (últimos 3 anos)?",
     answers: [
       { label: "A) Não", value: "A", points: 0 },
       {
@@ -92,7 +94,8 @@ export const questions: Question[] = [
   },
   {
     id: 4,
-    question: "Participação em projetos de transformação digital/inovação",
+    question:
+      "Você teve participação em projetos de transformação digital/inovação (últimos 5 anos)?",
     answers: [
       { label: "A) Não, e não tenho interesse", value: "A", points: 0 },
       { label: "B) Não, mas tenho interesse", value: "B", points: 2 },
@@ -107,7 +110,7 @@ export const questions: Question[] = [
   {
     id: 5,
     question:
-      "Ferramentas ou plataformas digitais utilizadas com frequência (pode marcar mais de uma opção)",
+      "Marque as ferramentas ou plataformas digitais que você utiliza (pode marcar mais de uma opção)",
     allowMultiple: true,
     answers: [
       {
@@ -186,7 +189,7 @@ export const questions: Question[] = [
   },
   {
     id: 6,
-    question: "Familiaridade com dados e analytics",
+    question: "Qual a sua familiaridade com a cultura de dados e analytics?",
     answers: [
       { label: "A) Nenhum conhecimento", value: "A", points: 0 },
       {
@@ -217,7 +220,7 @@ export const questions: Question[] = [
   {
     id: 7,
     question:
-      "Experiência com metodologias ágeis (Scrum, Kanban) ou gestão de produtos digitais",
+      "Você tem experiência com metodologias ágeis (Scrum, Kanban) ou gestão de produtos digitais?",
     answers: [
       { label: "A) Não, e não tenho interesse", value: "A", points: 0 },
       { label: "B) Não, mas tenho interesse", value: "B", points: 1 },
@@ -247,7 +250,8 @@ export const questions: Question[] = [
   },
   {
     id: 8,
-    question: "Uso de linguagens de programação",
+    question:
+      "Você tem alguma experiência com o uso de linguagens de programação?",
     answers: [
       { label: "A) Não", value: "A", points: 0 },
       {
@@ -290,7 +294,7 @@ export const questions: Question[] = [
   },
   {
     id: 10,
-    question: "Frequência de atualização sobre tendências digitais",
+    question: "Qual a sua frequência de atualização sobre tendências digitais?",
     answers: [
       { label: "A) Nunca", value: "A", points: 0 },
       {
@@ -315,7 +319,8 @@ export const questions: Question[] = [
   },
   {
     id: 11,
-    question: "Abertura para mudanças de processo com novas tecnologias",
+    question:
+      "Qual a sua percepção sobre a sua abertura para mudanças de processo com novas tecnologias?",
     answers: [
       {
         label: "A) Resistente: evita ou se opõe a mudanças",
@@ -355,7 +360,7 @@ export const questions: Question[] = [
   },
   {
     id: 12,
-    question: "Principal motivação para aprender novas ferramentas",
+    question: "Qual a sua principal motivação para aprender novas ferramentas?",
     answers: [
       { label: "A) Exigência da empresa", value: "A", points: 1 },
       {
@@ -380,7 +385,7 @@ export const questions: Question[] = [
   {
     id: 13,
     question:
-      "Áreas de negócio que mais se beneficiariam da transformação digital (pode marcar mais de uma)",
+      "Quais as àreas de negócio que mais se beneficiariam da transformação digital (pode marcar mais de uma) na sua empresa?",
     allowMultiple: true,
     answers: [
       { label: "A) Operações", value: "A", points: 3 },
@@ -418,7 +423,7 @@ export const questions: Question[] = [
   {
     id: 14,
     question:
-      "Iniciativas de capacitação ou suporte que a empresa deveria priorizar",
+      "Na sua opinião quais as iniciativas de capacitação ou suporte que a empresa deveria priorizar?",
     answers: [
       { label: "A) Capacitação em IA e automação", value: "A", points: 5 },
       {
@@ -451,7 +456,8 @@ export const questions: Question[] = [
   },
   {
     id: 15,
-    question: "Principal prioridade estratégica da empresa nos próximos 2 anos",
+    question:
+      "Na sua opinião, qual deveria ser a principal prioridade estratégica da empresa nos próximos 2 anos?",
     answers: [
       {
         label:
@@ -485,7 +491,7 @@ export const questions: Question[] = [
   },
   {
     id: 16,
-    question: "Maior obstáculo para a transformação digital da empresa",
+    question: "Qual o maior obstáculo para a transformação digital da empresa?",
     answers: [
       {
         label: "A) Resistência cultural e medo da mudança",
@@ -515,3 +521,7 @@ export const questions: Question[] = [
     ],
   },
 ];
+export const questions: Question[] = baseQuestions.map((questionNumber) => ({
+  ...questionNumber,
+  number: questionNumber.id,
+}));
