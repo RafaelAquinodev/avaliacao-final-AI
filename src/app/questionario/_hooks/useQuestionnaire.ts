@@ -62,14 +62,27 @@ export function useQuestionnaire(questions: Question[]) {
     }
 
     setIsSending(true);
-    console.log("Respostas completas:", resposta);
-
-    // Pular o envio ao banco e ir direto para o feedback:
-    toast.success("Respostas simuladas com sucesso! (Banco desativado)");
-    router.push(`/feedback/${totalScore}`);
-
-    setAnswers(new Array(questions.length).fill(""));
-    setIsSending(false);
+    try {
+      const response = await fetch("/api", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers: resposta,
+          company: formData.company,
+        }),
+      });
+      if (response.ok) {
+        toast.success("Respostas enviadas com sucesso!");
+        router.push(`/feedback/${totalScore}`);
+        setAnswers(new Array(questions.length).fill(""));
+      } else {
+        toast.error("Erro ao enviar as respostas. Tente novamente.");
+      }
+    } catch {
+      toast.error("Erro ao enviar as respostas.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return {

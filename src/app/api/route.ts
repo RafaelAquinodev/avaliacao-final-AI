@@ -16,6 +16,7 @@ interface ErrorResponse {
 export async function POST(req: Request): Promise<NextResponse> {
   try {
     const data: RequestBody = await req.json();
+    console.log("Payload recebido na API:", JSON.stringify(data, null, 2));
 
     const questionAnswer = await prisma.question.create({
       data: {
@@ -27,6 +28,7 @@ export async function POST(req: Request): Promise<NextResponse> {
     return NextResponse.json(questionAnswer, { status: 201 });
   } catch (error) {
     console.error("Erro ao salvar questionAnswer:", error);
+    console.error("Erro completo no catch da API:", error);
     return NextResponse.json({ error: "Erro ao salvar" } as ErrorResponse, {
       status: 500,
     });
