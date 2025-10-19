@@ -34,23 +34,23 @@ const Home = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
               <div className="flex flex-col items-center">
                 <CheckCircle className="h-12 w-12 text-primary mb-3" />
-                <h3 className="font-semibold mb-2">Avaliação Profunda</h3>
+                <h3 className="font-semibold mb-2">Conhecimento Técnico</h3>
                 <p className="text-sm text-muted-foreground">
-                  Perguntas sobre seu perfil digital
+                  Questões sobre fundamentos e conceitos essenciais de IA.
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <BarChart3 className="h-12 w-12 text-accent mb-3" />
-                <h3 className="font-semibold mb-2">Diagnóstico Detalhado</h3>
+                <h3 className="font-semibold mb-2">Raciocínio Aplicado</h3>
                 <p className="text-sm text-muted-foreground">
-                  Identifique seu nível de maturidade
+                  Casos práticos para testar sua capacidade analítica.
                 </p>
               </div>
               <div className="flex flex-col items-center">
                 <Target className="h-12 w-12 text-primary mb-3" />
-                <h3 className="font-semibold mb-2">Plano de Ação</h3>
+                <h3 className="font-semibold mb-2">Estratégia e Impacto</h3>
                 <p className="text-sm text-muted-foreground">
-                  Recomendações personalizadas
+                  Avalie sua visão estratégica e compreensão dos efeitos da IA.
                 </p>
               </div>
             </div>

@@ -121,6 +121,7 @@ export function QuestionCard({
                   md:max-w-2xl
                   whitespace-pre-line
                   text-left
+                  text-balance
                 "
               >
                 {answer.label}
